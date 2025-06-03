@@ -67,22 +67,107 @@ export default function MainFeature() {
     }
   }
 
-  const handleDownload = async () => {
+const handleDownload = async () => {
     if (!generatedPage) return
 
     try {
-      // Simulate PDF generation and download
-      toast.success('Your coloring page is being prepared for download!')
+      // Dynamic import for jsPDF
+      const { jsPDF } = await import('jspdf')
       
-      // In a real app, this would trigger an actual PDF download
-      const link = document.createElement('a')
-      link.href = '#'
-      link.download = `coloring-page-${generatedPage.topic.replace(/\s+/g, '-').toLowerCase()}.pdf`
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+      // Create PDF with specified page size
+      const pageFormat = pageSize === 'A4' ? 'a4' : 
+                        pageSize === 'Letter' ? 'letter' :
+                        pageSize === 'A3' ? 'a3' : 'legal'
+      
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: pageFormat
+      })
+
+      // Get page dimensions
+      const pageWidth = pdf.internal.pageSize.getWidth()
+      const pageHeight = pdf.internal.pageSize.getHeight()
+      
+      // Add title
+      pdf.setFontSize(16)
+      pdf.text(generatedPage.topic, pageWidth / 2, 20, { align: 'center' })
+      
+// Convert SVG to image and add to PDF
+      if (generatedPage.svgContent) {
+        const canvas = document.createElement('canvas')
+        const ctx = canvas.getContext('2d')
+        const img = new window.Image()
+        
+        // Set canvas size for high quality
+        canvas.width = 800
+        canvas.height = 1000
+        
+        // Create SVG data URL
+        const svgBlob = new Blob([generatedPage.svgContent], { type: 'image/svg+xml;charset=utf-8' })
+        const url = URL.createObjectURL(svgBlob)
+        
+        img.onload = () => {
+          // Clear canvas with white background
+          ctx.fillStyle = 'white'
+          ctx.fillRect(0, 0, canvas.width, canvas.height)
+          
+          // Draw the SVG image
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+          
+          // Convert to data URL
+          const imgData = canvas.toDataURL('image/png')
+          
+          // Calculate image size to fit on page with margins
+          const margin = 20
+          const maxWidth = pageWidth - (margin * 2)
+          const maxHeight = pageHeight - 40 // Space for title and margins
+          
+          const imgWidth = maxWidth
+          const imgHeight = (canvas.height / canvas.width) * maxWidth
+          
+          // Center the image
+          const x = (pageWidth - imgWidth) / 2
+          const y = 30
+          
+          // Add image to PDF
+          pdf.addImage(imgData, 'PNG', x, y, imgWidth, Math.min(imgHeight, maxHeight))
+          
+          // Save the PDF
+          const filename = `coloring-page-${generatedPage.topic.replace(/\s+/g, '-').toLowerCase()}.pdf`
+          pdf.save(filename)
+          
+          // Clean up
+          URL.revokeObjectURL(url)
+          
+          toast.success('Your coloring page has been downloaded!')
+        }
+        
+        img.onerror = () => {
+          // Fallback: create PDF without image
+          pdf.setFontSize(12)
+          pdf.text('Coloring page content will be available shortly.', pageWidth / 2, pageHeight / 2, { align: 'center' })
+          
+          const filename = `coloring-page-${generatedPage.topic.replace(/\s+/g, '-').toLowerCase()}.pdf`
+          pdf.save(filename)
+          
+          toast.success('Your coloring page has been downloaded!')
+        }
+        
+        img.src = url
+      } else {
+        // Create PDF without image
+        pdf.setFontSize(12)
+        pdf.text('Your coloring page is ready to print!', pageWidth / 2, pageHeight / 2, { align: 'center' })
+        
+        const filename = `coloring-page-${generatedPage.topic.replace(/\s+/g, '-').toLowerCase()}.pdf`
+        pdf.save(filename)
+        
+        toast.success('Your coloring page has been downloaded!')
+      }
     } catch (error) {
       toast.error('Download failed. Please try again.')
+      console.error('PDF generation error:', error)
     }
   }
 
