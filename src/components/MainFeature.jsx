@@ -272,21 +272,44 @@ export default function MainFeature() {
               </div>
             </div>
 
-            <div className="p-6 sm:p-8">
+<div className="p-6 sm:p-8">
               {/* Preview Area */}
               <div className="bg-gradient-to-br from-surface-50 to-surface-100 rounded-2xl p-8 mb-6 text-center border-2 border-dashed border-surface-300">
-                <div className="aspect-[3/4] max-w-md mx-auto bg-white rounded-xl shadow-card flex items-center justify-center border border-surface-200">
-                  <div className="text-center space-y-4">
-                    <ApperIcon name="FileImage" className="w-16 h-16 text-surface-400 mx-auto" />
-                    <div>
-                      <h4 className="font-semibold text-surface-800 mb-2">
-                        {generatedPage?.topic}
-                      </h4>
-                      <p className="text-sm text-surface-600">
-                        {pageSize} • {thicknessLabels[lineThickness]} lines
-                      </p>
+                <div className="aspect-[3/4] max-w-md mx-auto bg-white rounded-xl shadow-card border border-surface-200 overflow-hidden">
+                  {generatedPage?.imageData ? (
+                    <div className="h-full flex flex-col">
+                      <div className="flex-1 p-4 flex items-center justify-center">
+                        <img 
+                          src={generatedPage.imageData} 
+                          alt={`Coloring page: ${generatedPage?.topic}`}
+                          className="max-w-full max-h-full object-contain"
+                          style={{ filter: 'contrast(1.2)' }}
+                        />
+                      </div>
+                      <div className="p-4 bg-surface-50 border-t border-surface-200">
+                        <h4 className="font-semibold text-surface-800 mb-1">
+                          {generatedPage?.topic}
+                        </h4>
+                        <p className="text-sm text-surface-600">
+                          {pageSize} • {thicknessLabels[lineThickness]} lines
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div className="h-full flex items-center justify-center p-8">
+                      <div className="text-center space-y-4">
+                        <ApperIcon name="FileImage" className="w-16 h-16 text-surface-400 mx-auto" />
+                        <div>
+                          <h4 className="font-semibold text-surface-800 mb-2">
+                            {generatedPage?.topic}
+                          </h4>
+                          <p className="text-sm text-surface-600">
+                            {pageSize} • {thicknessLabels[lineThickness]} lines
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 
