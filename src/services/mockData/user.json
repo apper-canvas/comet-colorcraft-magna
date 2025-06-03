@@ -1,0 +1,122 @@
+[
+  {
+    "id": "user123",
+    "email": "creative.artist@example.com",
+    "createdPages": ["1", "4", "7", "10", "13"],
+    "favorites": ["2", "3", "6", "9", "12"],
+    "preferences": {
+      "defaultComplexity": 3,
+      "defaultLineThickness": 2,
+      "defaultPageSize": "A4",
+      "favoriteTopics": ["fantasy", "nature", "animals"]
+    }
+  },
+  {
+    "id": "user456",
+    "email": "parent.teacher@example.com",
+    "createdPages": ["2", "5", "8", "11", "14"],
+    "favorites": ["1", "4", "7", "10", "13"],
+    "preferences": {
+      "defaultComplexity": 2,
+      "defaultLineThickness": 3,
+      "defaultPageSize": "Letter",
+      "favoriteTopics": ["educational", "simple", "animals"]
+    }
+  },
+  {
+    "id": "user789",
+    "email": "design.enthusiast@example.com",
+    "createdPages": ["3", "6", "9", "12", "15"],
+    "favorites": ["5", "8", "11", "14"],
+    "preferences": {
+      "defaultComplexity": 5,
+      "defaultLineThickness": 1,
+      "defaultPageSize": "A3",
+      "favoriteTopics": ["detailed", "fantasy", "abstract"]
+    }
+  },
+  {
+    "id": "user101",
+    "email": "homeschool.mom@example.com",
+    "createdPages": [],
+    "favorites": ["1", "2", "4", "5"],
+    "preferences": {
+      "defaultComplexity": 3,
+      "defaultLineThickness": 2,
+      "defaultPageSize": "Letter",
+      "favoriteTopics": ["educational", "nature", "simple"]
+    }
+  },
+  {
+    "id": "user202",
+    "email": "art.teacher@example.com",
+    "createdPages": [],
+    "favorites": ["3", "6", "9", "12", "15"],
+    "preferences": {
+      "defaultComplexity": 4,
+      "defaultLineThickness": 2,
+      "defaultPageSize": "A4",
+      "favoriteTopics": ["detailed", "educational", "creative"]
+    }
+  },
+  {
+    "id": "user303",
+    "email": "therapist@example.com",
+    "createdPages": [],
+    "favorites": ["7", "8", "10", "11", "14"],
+    "preferences": {
+      "defaultComplexity": 2,
+      "defaultLineThickness": 3,
+      "defaultPageSize": "A4",
+      "favoriteTopics": ["relaxing", "simple", "nature"]
+    }
+  },
+  {
+    "id": "user404",
+    "email": "senior.care@example.com",
+    "createdPages": [],
+    "favorites": ["1", "5", "7", "11"],
+    "preferences": {
+      "defaultComplexity": 2,
+      "defaultLineThickness": 3,
+      "defaultPageSize": "A4",
+      "favoriteTopics": ["large print", "simple", "flowers"]
+    }
+  },
+  {
+    "id": "user505",
+    "email": "daycare.director@example.com",
+    "createdPages": [],
+    "favorites": ["2", "4", "8", "11"],
+    "preferences": {
+      "defaultComplexity": 1,
+      "defaultLineThickness": 3,
+      "defaultPageSize": "Letter",
+      "favoriteTopics": ["simple", "animals", "fun"]
+    }
+  },
+  {
+    "id": "user606",
+    "email": "adult.coloring@example.com",
+    "createdPages": [],
+    "favorites": ["3", "6", "9", "12", "13", "15"],
+    "preferences": {
+      "defaultComplexity": 5,
+      "defaultLineThickness": 1,
+      "defaultPageSize": "A4",
+      "favoriteTopics": ["detailed", "abstract", "relaxing"]
+    }
+  },
+  {
+    "id": "user707",
+    "email": "youth.counselor@example.com",
+    "createdPages": [],
+    "favorites": ["4", "7", "8", "10", "14"],
+    "preferences": {
+      "defaultComplexity": 3,
+      "defaultLineThickness": 2,
+      "defaultPageSize": "Letter",
+      "favoriteTopics": ["age-appropriate", "engaging", "positive"]
+    }
+  }
+]
